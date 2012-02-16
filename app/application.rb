@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'sinatra'
+require 'data_mapper'
+require 'dm-migrations'
 require 'model'
 
 
@@ -10,7 +12,9 @@ class SatApplication < Sinatra::Application
 
 connect_string="sqlite://#{settings.root}"
 DataMapper::Logger.new($stdout,:debug )
-DataMapper.setup(:default,"sqlite://#{Dir.pwd}/../db/sat.db")
+DataMapper.setup(:default,"sqlite://#{Dir.pwd}/db/sat.db")
+DataMapper.finalize.auto_migrate!
+
 
 
   configure do
@@ -20,6 +24,6 @@ DataMapper.setup(:default,"sqlite://#{Dir.pwd}/../db/sat.db")
 	end
 
 	get '/' do
-		"<H1>hello world</H1>"
+		"<H1>hello world sqlite://#{Dir.pwd}/db/sat.db</H1>"
 	end
 end
