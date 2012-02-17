@@ -4,11 +4,14 @@ require 'sinatra'
 require 'data_mapper'
 require 'dm-migrations'
 require 'model'
+require 'rack-flash'
+require 'sinatra/redirect_with_flash'
 
 
 class SatApplication < Sinatra::Application
 
 #set :root=>(File.dirname(__FILE__)).join('..')
+set :sessions, true
 
 connect_string="sqlite://#{settings.root}"
 DataMapper::Logger.new($stdout,:debug )
@@ -41,7 +44,7 @@ DataMapper.setup(:default,"sqlite://#{Dir.pwd}/db/sat.db")
 	
 	post '/tipos/' do
              t=Tipo.new
-	     t.texto = params[:tipo]
+	     			 t.texto = params[:tipo]
              t.save
 	end
 
