@@ -26,8 +26,6 @@ class Tipo
 		
 		property 	:id,				Serial
 		property	:texto,				String
-		property	:created_at,		DateTime
-		property	:updated_at,		DateTime
 		
 end
 	
