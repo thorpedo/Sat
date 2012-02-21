@@ -4,30 +4,29 @@ require 'sinatra'
 require 'data_mapper'
 require 'dm-migrations'
 require 'model'
-require 'rack-flash'
-require 'sinatra/redirect_with_flash'
+require 'sinatra/flash'
 
 
 class SatApplication < Sinatra::Application
 
 #set :root=>(File.dirname(__FILE__)).join('..')
-set :sessions, true
+enable :sessions
 
 connect_string="sqlite://#{settings.root}"
 DataMapper::Logger.new($stdout,:debug )
 DataMapper.setup(:default,"sqlite://#{Dir.pwd}/db/sat.db")
-#DataMapper.finalize.auto_migrate!
 
 
 
   configure do
 	end
 
-	helpers do
-	end
-
 	get '/' do
 		"<H1>hello world sqlite://#{Dir.pwd}/db/sat.db</H1>"
+	end
+
+	get '/create_db' do
+			DataMapper.auto_migrate!
 	end
 
 	get '/tipos' do
@@ -45,10 +44,17 @@ DataMapper.setup(:default,"sqlite://#{Dir.pwd}/db/sat.db")
 	post '/tipos/' do
              t=Tipo.new
 	     			 t.texto = params[:tipo]
-             t.save
+             if t.save
+										 flash[:notice ] = "registro grabado"
+						 else
+										 flash[:error ] = "NO SE PUDO GRABAR EL REGISTRO"
+						 end
+						 redirect "/tipos"
+
 	end
 
 	get '/trabajo/recepcion' do
+		  erb :recepcion			
 	end
 
 	post '/trabajo/recepcion' do

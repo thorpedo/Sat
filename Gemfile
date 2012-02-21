@@ -7,8 +7,7 @@ gem 'dm-core'
 gem 'dm-types'
 gem 'dm-migrations'
 gem 'data_mapper'
-gem 'rack-flash'
-gem 'sinatra-redirect-with-flash'
+gem 'sinatra-flash'
 
 
 group :development do
