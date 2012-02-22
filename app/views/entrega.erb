@@ -1,0 +1,35 @@
+<section id="entrega">
+	<form id="frm_entrega" method="post">
+		<fieldset>
+			<legend>Datos entrega</legend>
+			<ul>
+				<li><label>Fecha</label><input type="date" name="fecha_entrada"></li>
+				<li><label>Sintomas</label><textarea rows="5" cols="60" name="sintomas"></textarea></li>
+				<li><label>Hacer Backup</label><input type="checkbox" name="backup" value="true"></li>
+				<li>
+				<% if not @textos_backup.nil? %>
+								<ul>
+												<% @textos_backup.each do |t| %>
+																<li class="texto_backup_de">
+																	<%= t.texto  %>
+																</li>
+												<% end %>
+							</ul>
+				<% end	%>
+					<label>Backup de las siguientes carpetas</label><textarea rows="5" cols="60" name="backup_de"></textarea></li>
+				<li>
+				<% if not @textos_items.nil? %>
+						<ul>
+												<% @textos_items.each do |t| %>
+																<li class="texto_que_entrega">
+																	<%= t.texto  %>
+																</li>
+												<% end %>
+						</ul>
+				<% end	%>
+					<label>Items entregados</label><textarea rows="5" cols="60" name="que_entrega"></textarea></li>
+				<li><input type="submit" value="grabar"></li>
+			</ul>	
+		</fieldset>
+	</form>
+</section>
