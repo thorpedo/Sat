@@ -9,6 +9,7 @@ require 'sinatra/flash'
 
 class SatApplication < Sinatra::Application
 
+set :public_folder, Dir.pwd + '/static'
 #set :root=>(File.dirname(__FILE__)).join('..')
 enable :sessions
 
