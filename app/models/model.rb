@@ -61,6 +61,15 @@ class Tarea
 		belongs_to 	:equipo
 end
 
+class Texto
+	include DataMapper::Resource
+		
+		property 	:id,				Serial
+		property	:texto,				String
+		property	:tipo,				String
+
+end
+
 
 #DataMapper.auto_migrate!
 
