@@ -15,10 +15,11 @@ class Equipo
 	property	:nserie,			String,	:key=>true
 	property	:marca,				String
 	property	:modelo,			String
+	property	:password,		String
 
+	has n,			:tareas		
 	belongs_to	:propietario
 	belongs_to	:tipo
-#	has_n,		:tareas		
 end
 
 class Tipo
@@ -42,6 +43,10 @@ class Propietario
 		property	:movil,				String	
 		
 		has n,		:equipos
+
+		def nombre_completo
+						"#{nombre} #{apellido1} #{apellido2}"
+		end
 end
 
 class Tarea

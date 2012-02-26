@@ -9,8 +9,6 @@ require 'sinatra/flash'
 
 class SatApplication < Sinatra::Application
 
-set :public_folder, Dir.pwd + '/static'
-#set :root=>(File.dirname(__FILE__)).join('..')
 enable :sessions
 
 connect_string="sqlite://#{settings.root}"
@@ -65,5 +63,18 @@ DataMapper.setup(:default,"sqlite://#{Dir.pwd}/db/sat.db")
 	end
 
 	get '/trabajo/end' do
+	end
+
+	get '/equipo/search/:nserie' do
+			numeroserie=params[:nserie]
+			@e = Equipo.first :nserie => numeroserie 
+      if @e.nil?
+				 erb :equipo
+				 erb :persona
+			else
+							@persona = @e.propietario
+							erb :show_equipo_persona , layout=>false
+			end
+							
 	end
 end
